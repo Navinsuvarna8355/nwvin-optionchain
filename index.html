@@ -797,6 +797,171 @@ canvas.oi-chart { width: 100% !important; }
 .bdb-green .bdb-subtitle { color: rgba(0,229,160,.6); }
 .bdb-green .bdb-meter-fill { background: linear-gradient(90deg, #00e5a0, #00ffbb); }
 
+
+/* ═══════════════════════════════════════
+   MARKET SENTIMENT DASHBOARD
+═══════════════════════════════════════ */
+.sentiment-dashboard {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+  margin: 10px 16px;
+}
+.sent-card {
+  background: var(--panel2);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 12px 14px;
+  position: relative;
+  overflow: hidden;
+}
+.sent-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+}
+.sent-card.bull::before { background: var(--green); }
+.sent-card.bear::before { background: var(--red); }
+.sent-card.neutral::before { background: var(--yellow); }
+.sent-card.info::before { background: var(--accent); }
+.sent-lbl { font-size:8px; font-family:var(--font-mono); color:var(--muted); letter-spacing:1.5px; text-transform:uppercase; margin-bottom:4px; }
+.sent-val { font-family:var(--font-disp); font-size:22px; letter-spacing:1px; line-height:1; }
+.sent-sub { font-size:9px; font-family:var(--font-mono); color:var(--muted); margin-top:3px; }
+.sent-bar { height:3px; background:var(--border); border-radius:2px; margin-top:6px; overflow:hidden; }
+.sent-bar-fill { height:100%; border-radius:2px; transition: width 1s ease; }
+
+/* ═══════════════════════════════════════
+   TRADE SETUP CARD
+═══════════════════════════════════════ */
+.trade-setup-wrap {
+  margin: 10px 16px;
+  background: var(--panel2);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  overflow: hidden;
+}
+.trade-setup-header {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 12px 16px;
+  background: var(--panel3);
+  border-bottom: 1px solid var(--border);
+  cursor: pointer;
+}
+.trade-setup-title { font-family:var(--font-disp); font-size:16px; letter-spacing:2px; color:var(--text); }
+.trade-setup-body { padding: 14px 16px; display:none; }
+.trade-cards { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.trade-card {
+  background: var(--panel3);
+  border-radius: 10px;
+  padding: 14px;
+  border: 1px solid var(--border);
+  position: relative;
+}
+.trade-card.bull-card { border-color: rgba(0,229,160,.25); }
+.trade-card.bear-card { border-color: rgba(255,61,107,.25); }
+.trade-card-title { font-family:var(--font-disp); font-size:14px; letter-spacing:2px; margin-bottom:10px; }
+.trade-row { display:flex; justify-content:space-between; align-items:center; padding:5px 0; border-bottom:1px solid rgba(255,255,255,.04); }
+.trade-row:last-child { border-bottom:none; }
+.trade-key { font-size:9px; font-family:var(--font-mono); color:var(--muted); letter-spacing:1px; text-transform:uppercase; }
+.trade-val { font-family:var(--font-mono); font-size:12px; font-weight:700; }
+.trade-rr { margin-top:10px; padding:8px; background:rgba(0,0,0,.2); border-radius:6px; text-align:center; font-family:var(--font-mono); font-size:10px; }
+
+/* ═══════════════════════════════════════
+   PRICE ALERTS
+═══════════════════════════════════════ */
+.price-alert-wrap {
+  margin: 10px 16px;
+  background: var(--panel2);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  overflow: hidden;
+}
+.alert-input-row {
+  display: flex; gap: 8px; padding: 12px 16px;
+  border-bottom: 1px solid var(--border);
+  flex-wrap: wrap;
+}
+.alert-input-row input {
+  background: var(--panel3); border: 1px solid var(--border2);
+  border-radius: 6px; padding: 7px 10px;
+  color: var(--text); font-family: var(--font-mono); font-size: 11px;
+  width: 120px; outline: none;
+}
+.alert-input-row select {
+  background: var(--panel3); border: 1px solid var(--border2);
+  border-radius: 6px; padding: 7px 10px;
+  color: var(--text); font-family: var(--font-mono); font-size: 11px;
+  outline: none;
+}
+.price-alert-list { padding: 10px 16px; max-height: 160px; overflow-y: auto; }
+.pal-item {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 7px 0; border-bottom: 1px solid rgba(255,255,255,.04);
+  font-family: var(--font-mono); font-size: 11px;
+}
+.pal-item:last-child { border-bottom: none; }
+.pal-triggered { opacity:.4; text-decoration:line-through; }
+
+/* ═══════════════════════════════════════
+   OI CHANGE TRACKER
+═══════════════════════════════════════ */
+.oi-tracker-wrap {
+  margin: 10px 16px;
+  background: var(--panel2);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  overflow: hidden;
+}
+.oi-tracker-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1px;
+  background: var(--border);
+}
+.oi-tracker-cell {
+  background: var(--panel2);
+  padding: 10px 14px;
+}
+.oit-lbl { font-size:8px; font-family:var(--font-mono); color:var(--muted); letter-spacing:1.5px; margin-bottom:4px; }
+.oit-val { font-family:var(--font-disp); font-size:20px; }
+.oit-change { font-size:10px; font-family:var(--font-mono); margin-top:2px; }
+.oi-top-strikes { padding: 10px 16px; }
+.oi-strike-row {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 5px 0; border-bottom: 1px solid rgba(255,255,255,.04);
+  font-family: var(--font-mono); font-size: 10px;
+}
+.oi-strike-bar-wrap { flex:1; margin: 0 10px; height:4px; background:var(--border); border-radius:2px; overflow:hidden; }
+.oi-strike-bar-fill { height:100%; border-radius:2px; }
+
+/* FII/DII */
+.fiidii-wrap {
+  margin: 10px 16px;
+  background: var(--panel2);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  overflow: hidden;
+}
+.fiidii-grid {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 1px; background: var(--border);
+}
+.fiidii-cell { background: var(--panel2); padding: 14px 16px; }
+.fiidii-lbl { font-size:8px; font-family:var(--font-mono); color:var(--muted); letter-spacing:1.5px; margin-bottom:6px; }
+.fiidii-val { font-family:var(--font-disp); font-size:24px; }
+.fiidii-note { font-size:9px; color:var(--muted); font-family:var(--font-mono); margin-top:3px; }
+.fiidii-bar { height:4px; background:var(--border); border-radius:2px; margin-top:8px; overflow:hidden; }
+
+@media (max-width:768px) {
+  .sentiment-dashboard { grid-template-columns: repeat(2,1fr); }
+  .trade-cards { grid-template-columns: 1fr; }
+  .oi-tracker-grid { grid-template-columns: 1fr 1fr; }
+  .fiidii-grid { grid-template-columns: 1fr; }
+  .alert-input-row input { width:100%; }
+  .alert-input-row { flex-direction:column; }
+}
+
 .filter-wrap {
   background:var(--panel); border:1px solid var(--border); border-radius:10px;
   margin-bottom:14px; overflow:hidden;
@@ -1188,15 +1353,22 @@ tr.atm-row td.strike-cell { color:var(--accent); }
   <div class="ctrl-bar">
     <div class="ctrl-group">
       <div class="ctrl-label">Index / Symbol</div>
-      <select class="ctrl-select" id="symbolSel" onchange="onSymbolChange()">
-        <option value="NSE_INDEX|Nifty 50">NIFTY 50</option>
-        <option value="NSE_INDEX|Nifty Bank">BANKNIFTY</option>
-        <option value="NSE_INDEX|Nifty Fin Service">FINNIFTY</option>
-        <option value="NSE_INDEX|NIFTY MID SELECT">MIDCPNIFTY</option>
-        <option value="NSE_INDEX|Nifty Next 50">NIFTYNXT50</option>
-        <option value="BSE_INDEX|SENSEX">SENSEX</option>
-        <option value="BSE_INDEX|BANKEX">BANKEX</option>
-      </select>
+      <div style="position:relative;">
+        <input type="text" id="symbolSearch" placeholder="🔍 Search stock..." autocomplete="off"
+          style="width:100%;background:var(--panel2);border:1px solid var(--border2);border-radius:6px;
+          padding:7px 10px;color:var(--text);font-family:var(--font-mono);font-size:11px;letter-spacing:.5px;
+          box-sizing:border-box;outline:none;"
+          oninput="filterSymbols(this.value)"
+          onfocus="showSymbolDropdown()"
+          onblur="setTimeout(hideSymbolDropdown,200)"
+        />
+        <div id="symbolDropdown" style="
+          display:none;position:absolute;top:100%;left:0;right:0;z-index:999;
+          background:var(--panel2);border:1px solid var(--border2);border-radius:0 0 8px 8px;
+          max-height:260px;overflow-y:auto;box-shadow:0 8px 24px rgba(0,0,0,.6);
+        "></div>
+        <input type="hidden" id="symbolSel" value="NSE_INDEX|Nifty 50">
+      </div>
     </div>
     <div class="ctrl-group">
       <div class="ctrl-label">Expiry Date</div>
@@ -1272,6 +1444,174 @@ tr.atm-row td.strike-cell { color:var(--accent); }
       <div class="stat-lbl">IV SKEW (ATM)</div>
       <div class="stat-val purple" id="statIVskew">—</div>
       <div class="stat-sub">put IV − call IV</div>
+    </div>
+  </div>
+
+
+  <!-- ═══ MARKET SENTIMENT DASHBOARD ═══ -->
+  <div class="sentiment-dashboard" id="sentimentDash">
+    <div class="sent-card" id="sentTrend">
+      <div class="sent-lbl">TREND</div>
+      <div class="sent-val" id="sentTrendVal">—</div>
+      <div class="sent-sub" id="sentTrendSub">loading...</div>
+      <div class="sent-bar"><div class="sent-bar-fill" id="sentTrendBar" style="width:0%;background:var(--green)"></div></div>
+    </div>
+    <div class="sent-card" id="sentMomentum">
+      <div class="sent-lbl">OI MOMENTUM</div>
+      <div class="sent-val" id="sentMomVal">—</div>
+      <div class="sent-sub" id="sentMomSub">call vs put build</div>
+      <div class="sent-bar"><div class="sent-bar-fill" id="sentMomBar" style="width:0%;background:var(--accent)"></div></div>
+    </div>
+    <div class="sent-card" id="sentIV">
+      <div class="sent-lbl">IV ENVIRONMENT</div>
+      <div class="sent-val" id="sentIVval">—</div>
+      <div class="sent-sub" id="sentIVsub">implied volatility</div>
+      <div class="sent-bar"><div class="sent-bar-fill" id="sentIVbar" style="width:0%;background:var(--purple)"></div></div>
+    </div>
+    <div class="sent-card" id="sentTime">
+      <div class="sent-lbl">MARKET TIME</div>
+      <div class="sent-val" id="sentTimeVal">—</div>
+      <div class="sent-sub" id="sentTimeSub">market status</div>
+      <div class="sent-bar"><div class="sent-bar-fill" id="sentTimeBar" style="width:0%;background:var(--accent2)"></div></div>
+    </div>
+  </div>
+
+  <!-- ═══ TRADE SETUP CARD ═══ -->
+  <div class="trade-setup-wrap">
+    <div class="trade-setup-header" onclick="toggleTradeSetup()">
+      <div style="display:flex;align-items:center;gap:10px;">
+        <span style="font-size:18px;">🎯</span>
+        <div>
+          <div class="trade-setup-title">QUICK TRADE SETUP</div>
+          <div style="font-size:9px;color:var(--muted);font-family:var(--font-mono);letter-spacing:1px;">ENTRY · TARGET · STOP LOSS — AUTO CALCULATED</div>
+        </div>
+      </div>
+      <span style="color:var(--muted);font-size:12px;" id="tradeSetupChevron">▼</span>
+    </div>
+    <div class="trade-setup-body" id="tradeSetupBody">
+      <div class="trade-cards" id="tradeCards">
+        <div style="padding:20px;text-align:center;color:var(--muted);font-family:var(--font-mono);font-size:11px;">Option chain load karo — setup auto-calculate hoga</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ OI CHANGE TRACKER ═══ -->
+  <div class="oi-tracker-wrap">
+    <div class="trade-setup-header" onclick="toggleOITracker()">
+      <div style="display:flex;align-items:center;gap:10px;">
+        <span style="font-size:18px;">📊</span>
+        <div>
+          <div class="trade-setup-title">OI CHANGE TRACKER</div>
+          <div style="font-size:9px;color:var(--muted);font-family:var(--font-mono);letter-spacing:1px;">REAL-TIME OI ADD/REMOVE — TOP ACTIVE STRIKES</div>
+        </div>
+      </div>
+      <span style="color:var(--muted);font-size:12px;" id="oiTrackerChevron">▼</span>
+    </div>
+    <div id="oiTrackerBody" style="display:none;">
+      <div class="oi-tracker-grid">
+        <div class="oi-tracker-cell">
+          <div class="oit-lbl">TOTAL CALL OI CHANGE</div>
+          <div class="oit-val green" id="oitCallChg">—</div>
+          <div class="oit-change" id="oitCallChgPct">—</div>
+        </div>
+        <div class="oi-tracker-cell">
+          <div class="oit-lbl">TOTAL PUT OI CHANGE</div>
+          <div class="oit-val red" id="oitPutChg">—</div>
+          <div class="oit-change" id="oitPutChgPct">—</div>
+        </div>
+        <div class="oi-tracker-cell">
+          <div class="oit-lbl">MAX CALL ADDITION</div>
+          <div class="oit-val red" id="oitMaxCallAdd">—</div>
+          <div class="oit-change" id="oitMaxCallStrike">—</div>
+        </div>
+        <div class="oi-tracker-cell">
+          <div class="oit-lbl">MAX PUT ADDITION</div>
+          <div class="oit-val green" id="oitMaxPutAdd">—</div>
+          <div class="oit-change" id="oitMaxPutStrike">—</div>
+        </div>
+      </div>
+      <div class="oi-top-strikes">
+        <div style="font-size:8px;font-family:var(--font-mono);color:var(--muted);letter-spacing:2px;margin-bottom:8px;">TOP OI CHANGE STRIKES</div>
+        <div id="oiTopStrikes">—</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ PRICE ALERTS ═══ -->
+  <div class="price-alert-wrap">
+    <div class="trade-setup-header" onclick="togglePriceAlerts()">
+      <div style="display:flex;align-items:center;gap:10px;">
+        <span style="font-size:18px;">🔔</span>
+        <div>
+          <div class="trade-setup-title">PRICE ALERTS</div>
+          <div style="font-size:9px;color:var(--muted);font-family:var(--font-mono);letter-spacing:1px;">SPOT KISI LEVEL PE PAHUNCHE TOH NOTIFY KARO</div>
+        </div>
+      </div>
+      <span style="color:var(--muted);font-size:12px;" id="priceAlertChevron">▼</span>
+    </div>
+    <div id="priceAlertBody" style="display:none;">
+      <div class="alert-input-row">
+        <input type="number" id="paLevel" placeholder="Price level e.g. 23500" style="width:180px;">
+        <select id="paType">
+          <option value="above">↑ Upar jaaye</option>
+          <option value="below">↓ Neeche aaye</option>
+        </select>
+        <input type="text" id="paNote" placeholder="Note (optional)" style="width:140px;">
+        <button class="btn btn-primary btn-sm" onclick="addPriceAlert()">+ ADD ALERT</button>
+      </div>
+      <div class="price-alert-list" id="priceAlertList">
+        <div style="color:var(--muted);font-family:var(--font-mono);font-size:10px;padding:8px 0;">Koi alert nahi. Upar se add karo.</div>
+      </div>
+      <div style="padding:8px 16px;font-size:9px;color:var(--muted);font-family:var(--font-mono);">
+        ⚠ Browser tab open rehna chahiye alert ke liye. Sound + WhatsApp notification bhi jayega.
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ FII/DII DATA ═══ -->
+  <div class="fiidii-wrap">
+    <div class="trade-setup-header" onclick="toggleFiiDii()">
+      <div style="display:flex;align-items:center;gap:10px;">
+        <span style="font-size:18px;">🏦</span>
+        <div>
+          <div class="trade-setup-title">FII / DII ACTIVITY</div>
+          <div style="font-size:9px;color:var(--muted);font-family:var(--font-mono);letter-spacing:1px;">BADE PLAYERS KYA KAR RAHE HAIN</div>
+        </div>
+      </div>
+      <div style="display:flex;align-items:center;gap:8px;">
+        <button class="btn btn-sm" onclick="event.stopPropagation();fetchFiiDii()" style="font-size:9px;padding:4px 10px;">⟳ FETCH</button>
+        <span style="color:var(--muted);font-size:12px;" id="fiiDiiChevron">▼</span>
+      </div>
+    </div>
+    <div id="fiiDiiBody" style="display:none;">
+      <div class="fiidii-grid" id="fiiDiiGrid">
+        <div class="fiidii-cell">
+          <div class="fiidii-lbl">FII NET (CASH)</div>
+          <div class="fiidii-val" id="fiiCash">—</div>
+          <div class="fiidii-note" id="fiiCashNote">NSE data</div>
+          <div class="fiidii-bar"><div id="fiiCashBar" style="height:100%;border-radius:2px;width:50%;background:var(--muted);transition:width 1s"></div></div>
+        </div>
+        <div class="fiidii-cell">
+          <div class="fiidii-lbl">DII NET (CASH)</div>
+          <div class="fiidii-val" id="diiCash">—</div>
+          <div class="fiidii-note" id="diiCashNote">NSE data</div>
+          <div class="fiidii-bar"><div id="diiCashBar" style="height:100%;border-radius:2px;width:50%;background:var(--muted);transition:width 1s"></div></div>
+        </div>
+        <div class="fiidii-cell">
+          <div class="fiidii-lbl">FII INDEX FUTURES NET OI</div>
+          <div class="fiidii-val" id="fiiIndexFut">—</div>
+          <div class="fiidii-note" id="fiiIndexFutNote">Long vs Short</div>
+        </div>
+        <div class="fiidii-cell">
+          <div class="fiidii-lbl">FII SENTIMENT</div>
+          <div class="fiidii-val" id="fiiSentiment">—</div>
+          <div class="fiidii-note" id="fiiSentimentNote">Based on net flows</div>
+        </div>
+      </div>
+      <div style="padding:10px 16px;font-size:9px;color:var(--muted);font-family:var(--font-mono);line-height:1.6;">
+        ⚠ FII/DII data NSE website se fetch hota hai. Market hours ke baad update hota hai. CORS block hone par manual link diya jayega.
+        <br><a href="https://www.nseindia.com/reports-indices-debt/fii-dii-trading-activity" target="_blank" style="color:var(--accent);">NSE FII/DII Page →</a>
+      </div>
     </div>
   </div>
 
@@ -1688,13 +2028,183 @@ let maxOI       = 1;
 let aiPanelOpen = true;
 
 const INSTRUMENTS = {
-  'NSE_INDEX|Nifty 50':        { step:50,  label:'NIFTY 50' },
-  'NSE_INDEX|Nifty Bank':      { step:100, label:'BANKNIFTY' },
-  'NSE_INDEX|Nifty Fin Service':{ step:50, label:'FINNIFTY' },
-  'NSE_INDEX|NIFTY MID SELECT':{ step:25,  label:'MIDCPNIFTY'},
-  'NSE_INDEX|Nifty Next 50':   { step:50,  label:'NIFTYNXT50'},
-  'BSE_INDEX|SENSEX':          { step:100, label:'SENSEX' },
-  'BSE_INDEX|BANKEX':          { step:100, label:'BANKEX' },
+  // ── INDICES ──
+  'NSE_INDEX|Nifty 50':         { step:50,  label:'NIFTY 50',    type:'index' },
+  'NSE_INDEX|Nifty Bank':       { step:100, label:'BANKNIFTY',   type:'index' },
+  'NSE_INDEX|Nifty Fin Service':{ step:50,  label:'FINNIFTY',    type:'index' },
+  'NSE_INDEX|NIFTY MID SELECT': { step:25,  label:'MIDCPNIFTY',  type:'index' },
+  'NSE_INDEX|Nifty Next 50':    { step:50,  label:'NIFTYNXT50',  type:'index' },
+  'BSE_INDEX|SENSEX':           { step:100, label:'SENSEX',      type:'index' },
+  'BSE_INDEX|BANKEX':           { step:100, label:'BANKEX',      type:'index' },
+  // ── NSE F&O STOCKS ──
+  'NSE_EQ|RELIANCE':    { step:20,  label:'RELIANCE',    type:'stock' },
+  'NSE_EQ|TCS':         { step:50,  label:'TCS',         type:'stock' },
+  'NSE_EQ|HDFCBANK':    { step:20,  label:'HDFCBANK',    type:'stock' },
+  'NSE_EQ|INFY':        { step:20,  label:'INFY',        type:'stock' },
+  'NSE_EQ|ICICIBANK':   { step:20,  label:'ICICIBANK',   type:'stock' },
+  'NSE_EQ|SBIN':        { step:10,  label:'SBIN',        type:'stock' },
+  'NSE_EQ|BAJFINANCE':  { step:50,  label:'BAJFINANCE',  type:'stock' },
+  'NSE_EQ|HINDUNILVR':  { step:20,  label:'HINDUNILVR',  type:'stock' },
+  'NSE_EQ|KOTAKBANK':   { step:20,  label:'KOTAKBANK',   type:'stock' },
+  'NSE_EQ|AXISBANK':    { step:10,  label:'AXISBANK',    type:'stock' },
+  'NSE_EQ|LT':          { step:20,  label:'LT',          type:'stock' },
+  'NSE_EQ|WIPRO':       { step:10,  label:'WIPRO',       type:'stock' },
+  'NSE_EQ|ADANIENT':    { step:20,  label:'ADANIENT',    type:'stock' },
+  'NSE_EQ|ADANIPORTS':  { step:10,  label:'ADANIPORTS',  type:'stock' },
+  'NSE_EQ|ASIANPAINT':  { step:20,  label:'ASIANPAINT',  type:'stock' },
+  'NSE_EQ|BAJAJ-AUTO':  { step:50,  label:'BAJAJ-AUTO',  type:'stock' },
+  'NSE_EQ|BAJAJFINSV':  { step:20,  label:'BAJAJFINSV',  type:'stock' },
+  'NSE_EQ|BHARTIARTL':  { step:10,  label:'BHARTIARTL',  type:'stock' },
+  'NSE_EQ|BPCL':        { step:5,   label:'BPCL',        type:'stock' },
+  'NSE_EQ|BRITANNIA':   { step:50,  label:'BRITANNIA',   type:'stock' },
+  'NSE_EQ|CIPLA':       { step:10,  label:'CIPLA',       type:'stock' },
+  'NSE_EQ|COALINDIA':   { step:5,   label:'COALINDIA',   type:'stock' },
+  'NSE_EQ|DIVISLAB':    { step:50,  label:'DIVISLAB',    type:'stock' },
+  'NSE_EQ|DRREDDY':     { step:50,  label:'DRREDDY',     type:'stock' },
+  'NSE_EQ|EICHERMOT':   { step:50,  label:'EICHERMOT',   type:'stock' },
+  'NSE_EQ|GRASIM':      { step:20,  label:'GRASIM',      type:'stock' },
+  'NSE_EQ|HCLTECH':     { step:20,  label:'HCLTECH',     type:'stock' },
+  'NSE_EQ|HDFCLIFE':    { step:10,  label:'HDFCLIFE',    type:'stock' },
+  'NSE_EQ|HEROMOTOCO':  { step:50,  label:'HEROMOTOCO',  type:'stock' },
+  'NSE_EQ|HINDALCO':    { step:5,   label:'HINDALCO',    type:'stock' },
+  'NSE_EQ|INDUSINDBK':  { step:20,  label:'INDUSINDBK',  type:'stock' },
+  'NSE_EQ|ITC':         { step:5,   label:'ITC',         type:'stock' },
+  'NSE_EQ|JSWSTEEL':    { step:10,  label:'JSWSTEEL',    type:'stock' },
+  'NSE_EQ|M&M':         { step:20,  label:'M&M',         type:'stock' },
+  'NSE_EQ|MARUTI':      { step:100, label:'MARUTI',      type:'stock' },
+  'NSE_EQ|NESTLEIND':   { step:50,  label:'NESTLEIND',   type:'stock' },
+  'NSE_EQ|NTPC':        { step:5,   label:'NTPC',        type:'stock' },
+  'NSE_EQ|ONGC':        { step:5,   label:'ONGC',        type:'stock' },
+  'NSE_EQ|POWERGRID':   { step:5,   label:'POWERGRID',   type:'stock' },
+  'NSE_EQ|SBILIFE':     { step:10,  label:'SBILIFE',     type:'stock' },
+  'NSE_EQ|SHREECEM':    { step:200, label:'SHREECEM',    type:'stock' },
+  'NSE_EQ|SUNPHARMA':   { step:10,  label:'SUNPHARMA',   type:'stock' },
+  'NSE_EQ|TATACONSUM':  { step:10,  label:'TATACONSUM',  type:'stock' },
+  'NSE_EQ|TATAMOTORS':  { step:10,  label:'TATAMOTORS',  type:'stock' },
+  'NSE_EQ|TATASTEEL':   { step:5,   label:'TATASTEEL',   type:'stock' },
+  'NSE_EQ|TECHM':       { step:10,  label:'TECHM',       type:'stock' },
+  'NSE_EQ|TITAN':       { step:20,  label:'TITAN',       type:'stock' },
+  'NSE_EQ|ULTRACEMCO':  { step:50,  label:'ULTRACEMCO',  type:'stock' },
+  'NSE_EQ|UPL':         { step:10,  label:'UPL',         type:'stock' },
+  'NSE_EQ|VEDL':        { step:5,   label:'VEDL',        type:'stock' },
+  'NSE_EQ|ZOMATO':      { step:5,   label:'ZOMATO',      type:'stock' },
+  'NSE_EQ|PAYTM':       { step:5,   label:'PAYTM',       type:'stock' },
+  'NSE_EQ|NYKAA':       { step:5,   label:'NYKAA',       type:'stock' },
+  'NSE_EQ|DMART':       { step:50,  label:'DMART',       type:'stock' },
+  'NSE_EQ|PNB':         { step:2,   label:'PNB',         type:'stock' },
+  'NSE_EQ|BANKBARODA':  { step:2,   label:'BANKBARODA',  type:'stock' },
+  'NSE_EQ|CANBK':       { step:5,   label:'CANBK',       type:'stock' },
+  'NSE_EQ|IDFCFIRSTB':  { step:2,   label:'IDFCFIRSTB',  type:'stock' },
+  'NSE_EQ|FEDERALBNK':  { step:2,   label:'FEDERALBNK',  type:'stock' },
+  'NSE_EQ|BANDHANBNK':  { step:5,   label:'BANDHANBNK',  type:'stock' },
+  'NSE_EQ|AUBANK':      { step:10,  label:'AUBANK',      type:'stock' },
+  'NSE_EQ|MUTHOOTFIN':  { step:20,  label:'MUTHOOTFIN',  type:'stock' },
+  'NSE_EQ|CHOLAFIN':    { step:20,  label:'CHOLAFIN',    type:'stock' },
+  'NSE_EQ|MANAPPURAM':  { step:5,   label:'MANAPPURAM',  type:'stock' },
+  'NSE_EQ|LICHSGFIN':   { step:10,  label:'LICHSGFIN',   type:'stock' },
+  'NSE_EQ|RECLTD':      { step:5,   label:'RECLTD',      type:'stock' },
+  'NSE_EQ|PFC':         { step:5,   label:'PFC',         type:'stock' },
+  'NSE_EQ|IRFC':        { step:2,   label:'IRFC',        type:'stock' },
+  'NSE_EQ|HAL':         { step:50,  label:'HAL',         type:'stock' },
+  'NSE_EQ|BEL':         { step:5,   label:'BEL',         type:'stock' },
+  'NSE_EQ|IRCTC':       { step:20,  label:'IRCTC',       type:'stock' },
+  'NSE_EQ|IREDA':       { step:5,   label:'IREDA',       type:'stock' },
+  'NSE_EQ|NHPC':        { step:2,   label:'NHPC',        type:'stock' },
+  'NSE_EQ|SJVN':        { step:2,   label:'SJVN',        type:'stock' },
+  'NSE_EQ|TATAPOWER':   { step:5,   label:'TATAPOWER',   type:'stock' },
+  'NSE_EQ|ADANIGREEN':  { step:20,  label:'ADANIGREEN',  type:'stock' },
+  'NSE_EQ|ADANITRANS':  { step:20,  label:'ADANITRANS',  type:'stock' },
+  'NSE_EQ|ADANIPOWER':  { step:10,  label:'ADANIPOWER',  type:'stock' },
+  'NSE_EQ|TORNTPOWER':  { step:10,  label:'TORNTPOWER',  type:'stock' },
+  'NSE_EQ|CESC':        { step:5,   label:'CESC',        type:'stock' },
+  'NSE_EQ|IDEA':        { step:1,   label:'IDEA',        type:'stock' },
+  'NSE_EQ|MTNL':        { step:2,   label:'MTNL',        type:'stock' },
+  'NSE_EQ|ZEEL':        { step:5,   label:'ZEEL',        type:'stock' },
+  'NSE_EQ|PVRINOX':     { step:20,  label:'PVRINOX',     type:'stock' },
+  'NSE_EQ|INOXWIND':    { step:10,  label:'INOXWIND',    type:'stock' },
+  'NSE_EQ|APOLLOHOSP':  { step:20,  label:'APOLLOHOSP',  type:'stock' },
+  'NSE_EQ|MAXHEALTH':   { step:10,  label:'MAXHEALTH',   type:'stock' },
+  'NSE_EQ|FORTIS':      { step:5,   label:'FORTIS',      type:'stock' },
+  'NSE_EQ|AUROPHARMA':  { step:10,  label:'AUROPHARMA',  type:'stock' },
+  'NSE_EQ|LUPIN':       { step:20,  label:'LUPIN',       type:'stock' },
+  'NSE_EQ|BIOCON':      { step:5,   label:'BIOCON',      type:'stock' },
+  'NSE_EQ|GLAND':       { step:50,  label:'GLAND',       type:'stock' },
+  'NSE_EQ|ALKEM':       { step:50,  label:'ALKEM',       type:'stock' },
+  'NSE_EQ|TORNTPHARM':  { step:20,  label:'TORNTPHARM',  type:'stock' },
+  'NSE_EQ|IPCALAB':     { step:20,  label:'IPCALAB',     type:'stock' },
+  'NSE_EQ|ABBOTINDIA':  { step:200, label:'ABBOTINDIA',  type:'stock' },
+  'NSE_EQ|GMRAIRPORT':  { step:2,   label:'GMRAIRPORT',  type:'stock' },
+  'NSE_EQ|INDIGO':      { step:50,  label:'INDIGO',      type:'stock' },
+  'NSE_EQ|SPICEJET':    { step:2,   label:'SPICEJET',    type:'stock' },
+  'NSE_EQ|CONCOR':      { step:10,  label:'CONCOR',      type:'stock' },
+  'NSE_EQ|ZYDUSLIFE':   { step:10,  label:'ZYDUSLIFE',   type:'stock' },
+  'NSE_EQ|VOLTAS':      { step:10,  label:'VOLTAS',      type:'stock' },
+  'NSE_EQ|HAVELLS':     { step:20,  label:'HAVELLS',     type:'stock' },
+  'NSE_EQ|CROMPTON':    { step:5,   label:'CROMPTON',    type:'stock' },
+  'NSE_EQ|POLYCAB':     { step:50,  label:'POLYCAB',     type:'stock' },
+  'NSE_EQ|ABB':         { step:50,  label:'ABB',         type:'stock' },
+  'NSE_EQ|SIEMENS':     { step:50,  label:'SIEMENS',     type:'stock' },
+  'NSE_EQ|CGPOWER':     { step:10,  label:'CGPOWER',     type:'stock' },
+  'NSE_EQ|BHEL':        { step:5,   label:'BHEL',        type:'stock' },
+  'NSE_EQ|LTIM':        { step:50,  label:'LTIM',        type:'stock' },
+  'NSE_EQ|MPHASIS':     { step:50,  label:'MPHASIS',     type:'stock' },
+  'NSE_EQ|PERSISTENT':  { step:100, label:'PERSISTENT',  type:'stock' },
+  'NSE_EQ|COFORGE':     { step:50,  label:'COFORGE',     type:'stock' },
+  'NSE_EQ|LTTS':        { step:50,  label:'LTTS',        type:'stock' },
+  'NSE_EQ|OFSS':        { step:100, label:'OFSS',        type:'stock' },
+  'NSE_EQ|KPITTECH':    { step:10,  label:'KPITTECH',    type:'stock' },
+  'NSE_EQ|TATAELXSI':   { step:100, label:'TATAELXSI',   type:'stock' },
+  'NSE_EQ|DIXON':       { step:100, label:'DIXON',       type:'stock' },
+  'NSE_EQ|AMBER':       { step:50,  label:'AMBER',       type:'stock' },
+  'NSE_EQ|KAYNES':      { step:50,  label:'KAYNES',      type:'stock' },
+  'NSE_EQ|TATACHEM':    { step:10,  label:'TATACHEM',    type:'stock' },
+  'NSE_EQ|PIDILITIND':  { step:20,  label:'PIDILITIND',  type:'stock' },
+  'NSE_EQ|BERGEPAINT':  { step:10,  label:'BERGEPAINT',  type:'stock' },
+  'NSE_EQ|KANSAINER':   { step:20,  label:'KANSAINER',   type:'stock' },
+  'NSE_EQ|INDIAMART':   { step:100, label:'INDIAMART',   type:'stock' },
+  'NSE_EQ|NAUKRI':      { step:100, label:'NAUKRI',      type:'stock' },
+  'NSE_EQ|JUSTDIAL':    { step:20,  label:'JUSTDIAL',    type:'stock' },
+  'NSE_EQ|TRENT':       { step:50,  label:'TRENT',       type:'stock' },
+  'NSE_EQ|VEDANTA':     { step:5,   label:'VEDANTA',     type:'stock' },
+  'NSE_EQ|HINDZINC':    { step:10,  label:'HINDZINC',    type:'stock' },
+  'NSE_EQ|NATIONALUM':  { step:5,   label:'NATIONALUM',  type:'stock' },
+  'NSE_EQ|JINDALSTEL':  { step:10,  label:'JINDALSTEL',  type:'stock' },
+  'NSE_EQ|SAIL':        { step:5,   label:'SAIL',        type:'stock' },
+  'NSE_EQ|NMDC':        { step:5,   label:'NMDC',        type:'stock' },
+  'NSE_EQ|MOTHERSON':   { step:5,   label:'MOTHERSON',   type:'stock' },
+  'NSE_EQ|BALKRISIND':  { step:20,  label:'BALKRISIND',  type:'stock' },
+  'NSE_EQ|MRF':         { step:500, label:'MRF',         type:'stock' },
+  'NSE_EQ|APOLLOTYRE':  { step:5,   label:'APOLLOTYRE',  type:'stock' },
+  'NSE_EQ|BOSCHLTD':    { step:200, label:'BOSCHLTD',    type:'stock' },
+  'NSE_EQ|M&MFIN':      { step:5,   label:'M&MFIN',      type:'stock' },
+  'NSE_EQ|SHRIRAMFIN':  { step:20,  label:'SHRIRAMFIN',  type:'stock' },
+  'NSE_EQ|SUNDARMFIN':  { step:50,  label:'SUNDARMFIN',  type:'stock' },
+  'NSE_EQ|AAVAS':       { step:50,  label:'AAVAS',       type:'stock' },
+  'NSE_EQ|HOMEFIRST':   { step:20,  label:'HOMEFIRST',   type:'stock' },
+  'NSE_EQ|HDFCAMC':     { step:50,  label:'HDFCAMC',     type:'stock' },
+  'NSE_EQ|NIPPONLIFE':  { step:10,  label:'NIPPONLIFE',  type:'stock' },
+  'NSE_EQ|ICICIGI':     { step:20,  label:'ICICIGI',     type:'stock' },
+  'NSE_EQ|STARHEALTH':  { step:10,  label:'STARHEALTH',  type:'stock' },
+  'NSE_EQ|NIACL':       { step:10,  label:'NIACL',       type:'stock' },
+  'NSE_EQ|GICRE':       { step:20,  label:'GICRE',       type:'stock' },
+  'NSE_EQ|DELHIVERY':   { step:5,   label:'DELHIVERY',   type:'stock' },
+  'NSE_EQ|MARICO':      { step:5,   label:'MARICO',      type:'stock' },
+  'NSE_EQ|DABUR':       { step:5,   label:'DABUR',       type:'stock' },
+  'NSE_EQ|COLPAL':      { step:20,  label:'COLPAL',      type:'stock' },
+  'NSE_EQ|GODREJCP':    { step:10,  label:'GODREJCP',    type:'stock' },
+  'NSE_EQ|EMAMILTD':    { step:10,  label:'EMAMILTD',    type:'stock' },
+  'NSE_EQ|UBL':         { step:20,  label:'UBL',         type:'stock' },
+  'NSE_EQ|MCDOWELL-N':  { step:20,  label:'MCDOWELL-N',  type:'stock' },
+  'NSE_EQ|RADICO':      { step:20,  label:'RADICO',      type:'stock' },
+  'NSE_EQ|VBL':         { step:10,  label:'VBL',         type:'stock' },
+  'NSE_EQ|IEX':         { step:2,   label:'IEX',         type:'stock' },
+  'NSE_EQ|MCX':         { step:20,  label:'MCX',         type:'stock' },
+  'NSE_EQ|BSE':         { step:50,  label:'BSE',         type:'stock' },
+  'NSE_EQ|CDSL':        { step:20,  label:'CDSL',        type:'stock' },
+  'NSE_EQ|ANGELONE':    { step:50,  label:'ANGELONE',    type:'stock' },
+  'NSE_EQ|360ONE':      { step:20,  label:'360ONE',      type:'stock' },
+  'NSE_EQ|DOMS':        { step:50,  label:'DOMS',        type:'stock' },
+  'NSE_EQ|LICI':        { step:10,  label:'LICI',        type:'stock' },
 };
 
 /* ══════════════════════════════════════════ CLOCK ══ */
@@ -1703,6 +2213,96 @@ setInterval(() => {
 }, 1000);
 
 
+
+
+/* ══════════════════════════════════════════
+   SYMBOL SEARCH & DROPDOWN
+══════════════════════════════════════════ */
+function buildSymbolDropdown(filter) {
+  const dd = document.getElementById('symbolDropdown');
+  if (!dd) return;
+  const f = (filter || '').toUpperCase().trim();
+
+  const indices = Object.entries(INSTRUMENTS).filter(([k,v]) => v.type === 'index');
+  const stocks  = Object.entries(INSTRUMENTS).filter(([k,v]) => v.type === 'stock' && (!f || v.label.includes(f) || k.includes(f)));
+  const allIdx  = f ? indices.filter(([k,v]) => v.label.includes(f) || k.includes(f)) : indices;
+
+  let html = '';
+
+  if (!f || allIdx.length) {
+    html += `<div style="padding:5px 10px;font-size:8px;font-family:var(--font-mono);color:var(--muted);letter-spacing:2px;background:var(--panel3);position:sticky;top:0;">INDICES</div>`;
+    allIdx.forEach(([k,v]) => {
+      const selected = document.getElementById('symbolSel').value === k;
+      html += `<div onclick="selectSymbol('${k}','${v.label}')"
+        style="padding:8px 14px;cursor:pointer;font-family:var(--font-mono);font-size:11px;letter-spacing:.5px;
+        color:${selected ? 'var(--accent)' : 'var(--text)'};
+        background:${selected ? 'rgba(0,201,255,.08)' : 'transparent'};
+        border-left:${selected ? '2px solid var(--accent)' : '2px solid transparent'};
+        transition:background .1s;"
+        onmouseover="this.style.background='rgba(0,201,255,.06)'"
+        onmouseout="this.style.background='${selected ? 'rgba(0,201,255,.08)' : 'transparent'}'">
+        📊 ${v.label}
+      </div>`;
+    });
+  }
+
+  if (stocks.length) {
+    html += `<div style="padding:5px 10px;font-size:8px;font-family:var(--font-mono);color:var(--muted);letter-spacing:2px;background:var(--panel3);position:sticky;top:0;">
+      F&O STOCKS (${stocks.length}) &nbsp;·&nbsp; 
+      <span style="color:var(--yellow);">⚠ Stock ke liye exact instrument key chahiye — Upstox console se verify karo</span>
+    </div>`;
+    stocks.slice(0, 80).forEach(([k,v]) => {
+      const selected = document.getElementById('symbolSel').value === k;
+      html += `<div onclick="selectSymbol('${k}','${v.label}')"
+        style="padding:8px 14px;cursor:pointer;font-family:var(--font-mono);font-size:11px;letter-spacing:.5px;
+        color:${selected ? 'var(--green)' : 'var(--text)'};
+        background:${selected ? 'rgba(0,229,160,.08)' : 'transparent'};
+        border-left:${selected ? '2px solid var(--green)' : '2px solid transparent'};
+        transition:background .1s;"
+        onmouseover="this.style.background='rgba(0,229,160,.05)'"
+        onmouseout="this.style.background='${selected ? 'rgba(0,229,160,.08)' : 'transparent'}'">
+        📈 ${v.label}
+      </div>`;
+    });
+    if (stocks.length > 80) {
+      html += `<div style="padding:6px 14px;font-size:9px;color:var(--muted);font-family:var(--font-mono);">...aur ${stocks.length - 80} stocks. Search se dhundho.</div>`;
+    }
+  }
+
+  if (!html) {
+    html = `<div style="padding:12px 14px;font-size:11px;color:var(--muted);font-family:var(--font-mono);">No results for "${filter}"</div>`;
+  }
+
+  dd.innerHTML = html;
+}
+
+function showSymbolDropdown() {
+  const dd = document.getElementById('symbolDropdown');
+  if (dd) { buildSymbolDropdown(''); dd.style.display = 'block'; }
+}
+function hideSymbolDropdown() {
+  const dd = document.getElementById('symbolDropdown');
+  if (dd) dd.style.display = 'none';
+}
+function filterSymbols(val) {
+  buildSymbolDropdown(val);
+  const dd = document.getElementById('symbolDropdown');
+  if (dd) dd.style.display = 'block';
+}
+function selectSymbol(key, label) {
+  document.getElementById('symbolSel').value = key;
+  document.getElementById('symbolSearch').value = label;
+  hideSymbolDropdown();
+  onSymbolChange();
+}
+
+// Init search box with current value
+document.addEventListener('DOMContentLoaded', function() {
+  const cur = document.getElementById('symbolSel')?.value || 'NSE_INDEX|Nifty 50';
+  const lbl = INSTRUMENTS[cur]?.label || 'NIFTY 50';
+  const inp = document.getElementById('symbolSearch');
+  if (inp) inp.value = lbl;
+});
 
 /* ════════════════════════════════════ AI PANEL UI ══ */
 function toggleAiPanel() {
@@ -1760,10 +2360,21 @@ function runAiAnalysis() {
 
 /* ── Core Rule-Based Analysis Engine ── */
 function getDaysToExpiry(expiryStr) {
-  // expiryStr like "2026-03-17"
-  if (!expiryStr) return 999;
-  const expDate = new Date(expiryStr);
-  const today   = new Date();
+  if (!expiryStr || expiryStr === 'Loading...') return 999;
+  // Handle formats: "2026-03-17", "17-Mar-2026", "2026/03/17"
+  let expDate;
+  if (/^\d{4}-\d{2}-\d{2}$/.test(expiryStr)) {
+    // "2026-03-17" → parse directly avoiding timezone shift
+    const [y,m,d] = expiryStr.split('-').map(Number);
+    expDate = new Date(y, m-1, d);
+  } else if (/^\d{2}-[A-Za-z]{3}-\d{4}$/.test(expiryStr)) {
+    // "17-Mar-2026"
+    expDate = new Date(expiryStr.replace(/-/g,' '));
+  } else {
+    expDate = new Date(expiryStr);
+  }
+  if (isNaN(expDate.getTime())) return 999;
+  const today = new Date();
   today.setHours(0,0,0,0);
   expDate.setHours(0,0,0,0);
   return Math.max(0, Math.round((expDate - today) / (1000 * 60 * 60 * 24)));
@@ -3338,6 +3949,10 @@ function logNotif(msg) {
 const _origFetchChainSuccess = window._fetchChainHooked;
 function onChainLoaded() {
   calcBuyingDanger();
+  updateSentimentDash();
+  updateTradeSetup();
+  updateOITracker();
+  checkPriceAlerts(chainData[0]?.underlying_spot_price||0);
   runAlerts();
   renderHeatmap();
   populateCandleStrikes();
@@ -3570,6 +4185,425 @@ function calcBuyingDanger() {
   return { dangerScore, level, colorClass };
 }
 
+
+/* ══════════════════════════════════════════════════════
+   MARKET SENTIMENT DASHBOARD
+══════════════════════════════════════════════════════ */
+function updateSentimentDash() {
+  if (!chainData.length) return;
+  const instrKey = document.getElementById('symbolSel').value;
+  const step     = INSTRUMENTS[instrKey]?.step || 50;
+  const spot     = chainData[0]?.underlying_spot_price || 0;
+  const atm      = Math.round(spot / step) * step;
+
+  // ── Trend ──
+  let callOI=0, putOI=0, callChg=0, putChg=0;
+  chainData.forEach(d => {
+    const ce = d.call_options?.market_data || {};
+    const pe = d.put_options?.market_data  || {};
+    callOI  += ce.oi || 0;
+    putOI   += pe.oi || 0;
+    callChg += (ce.oi||0) - (ce.prev_oi||0);
+    putChg  += (pe.oi||0) - (pe.prev_oi||0);
+  });
+  const pcr = callOI > 0 ? putOI/callOI : 1;
+  const maxPain = calcMaxPain(chainData, spot);
+  const painAbove = maxPain > spot;
+
+  let trend='NEUTRAL', trendColor='var(--yellow)', trendPct=50;
+  if (pcr > 1.2 && painAbove) { trend='BULLISH'; trendColor='var(--green)'; trendPct=75; }
+  else if (pcr > 1.0 && painAbove) { trend='MILD BULL'; trendColor='var(--green)'; trendPct=62; }
+  else if (pcr < 0.7 && !painAbove) { trend='BEARISH'; trendColor='var(--red)'; trendPct=25; }
+  else if (pcr < 0.85) { trend='MILD BEAR'; trendColor='var(--red)'; trendPct=38; }
+
+  document.getElementById('sentTrendVal').textContent = trend;
+  document.getElementById('sentTrendVal').style.color = trendColor;
+  document.getElementById('sentTrendSub').textContent = `PCR ${pcr.toFixed(2)} · Pain ${painAbove?'↑':'↓'}`;
+  document.getElementById('sentTrendBar').style.width = trendPct+'%';
+  document.getElementById('sentTrendBar').style.background = trendColor;
+  document.getElementById('sentTrend').className = 'sent-card ' + (trendPct>55?'bull':trendPct<45?'bear':'neutral');
+
+  // ── OI Momentum ──
+  const momPct = callChg+putChg !== 0 ? Math.round(putChg/(Math.abs(callChg)+Math.abs(putChg))*100) : 50;
+  const momLabel = putChg > callChg*1.5 ? 'PUT HEAVY' : callChg > putChg*1.5 ? 'CALL HEAVY' : 'BALANCED';
+  const momColor = putChg > callChg ? 'var(--green)' : 'var(--red)';
+  document.getElementById('sentMomVal').textContent = momLabel;
+  document.getElementById('sentMomVal').style.color = momColor;
+  document.getElementById('sentMomSub').textContent = `Calls +${fmtK(Math.max(0,callChg))} / Puts +${fmtK(Math.max(0,putChg))}`;
+  document.getElementById('sentMomBar').style.width = Math.max(5,Math.min(95,momPct))+'%';
+  document.getElementById('sentMomBar').style.background = momColor;
+
+  // ── IV Environment ──
+  const atmRow = chainData.find(d => d.strike_price === atm);
+  const iv = atmRow?.call_options?.option_greeks?.iv || 0;
+  const ivLabel = iv > 25 ? 'HIGH IV' : iv > 15 ? 'NORMAL' : iv > 0 ? 'LOW IV' : '—';
+  const ivColor = iv > 25 ? 'var(--red)' : iv > 15 ? 'var(--yellow)' : 'var(--green)';
+  document.getElementById('sentIVval').textContent = iv > 0 ? iv.toFixed(1)+'%' : '—';
+  document.getElementById('sentIVval').style.color = ivColor;
+  document.getElementById('sentIVsub').textContent = ivLabel + (iv>20?' — Selling better':'') + (iv<15&&iv>0?' — Buying ok':'');
+  document.getElementById('sentIVbar').style.width = Math.min(100, iv*3)+'%';
+  document.getElementById('sentIVbar').style.background = ivColor;
+
+  // ── Market Time ──
+  const now = new Date();
+  const h = now.getHours(), m = now.getMinutes();
+  const mins = h*60+m;
+  const open=9*60+15, close=15*60+30;
+  let timeLabel, timeSub, timePct, timeColor;
+  if (mins < open) {
+    const left = open-mins;
+    timeLabel='PRE-MKT'; timeSub=`Opens in ${Math.floor(left/60)}h ${left%60}m`;
+    timePct=10; timeColor='var(--muted)';
+  } else if (mins > close) {
+    timeLabel='CLOSED'; timeSub='Market band. Kal 9:15 AM';
+    timePct=100; timeColor='var(--red)';
+  } else {
+    const elapsed=mins-open, total=close-open;
+    timePct=Math.round(elapsed/total*100);
+    const left=close-mins;
+    if (left <= 30) { timeLabel='CLOSING'; timeColor='var(--red)'; }
+    else if (left <= 60) { timeLabel='LAST HOUR'; timeColor='var(--accent2)'; }
+    else if (left <= 90) { timeLabel='AFTERNOON'; timeColor='var(--yellow)'; }
+    else { timeLabel='ACTIVE'; timeColor='var(--green)'; }
+    timeSub = `${Math.floor(left/60)}h ${left%60}m left`;
+  }
+  document.getElementById('sentTimeVal').textContent = timeLabel;
+  document.getElementById('sentTimeVal').style.color = timeColor;
+  document.getElementById('sentTimeSub').textContent = timeSub;
+  document.getElementById('sentTimeBar').style.width = timePct+'%';
+  document.getElementById('sentTimeBar').style.background = timeColor;
+}
+
+/* ══════════════════════════════════════════════════════
+   QUICK TRADE SETUP CARD
+══════════════════════════════════════════════════════ */
+function toggleTradeSetup() {
+  const body = document.getElementById('tradeSetupBody');
+  const chev = document.getElementById('tradeSetupChevron');
+  const open = body.style.display === 'none' || !body.style.display;
+  body.style.display = open ? 'block' : 'none';
+  chev.textContent = open ? '▼' : '▶';
+  if (open) updateTradeSetup();
+}
+
+function updateTradeSetup() {
+  if (!chainData.length) return;
+  const instrKey = document.getElementById('symbolSel').value;
+  const step     = INSTRUMENTS[instrKey]?.step || 50;
+  const spot     = chainData[0]?.underlying_spot_price || 0;
+  const atm      = Math.round(spot / step) * step;
+  const expiry   = document.getElementById('expirySel').value;
+  const dte      = getDaysToExpiry(expiry);
+
+  const atmRow   = chainData.find(d => d.strike_price === atm);
+  const ceLTP    = atmRow?.call_options?.market_data?.ltp || 0;
+  const peLTP    = atmRow?.put_options?.market_data?.ltp  || 0;
+  const atmIV    = atmRow?.call_options?.option_greeks?.iv || 20;
+
+  // ATM+1 for CE, ATM-1 for PE
+  const atmP1    = chainData.find(d => d.strike_price === atm+step);
+  const atmM1    = chainData.find(d => d.strike_price === atm-step);
+  const ceStrike = atm + step;
+  const peStrike = atm - step;
+  const ceSL     = Math.round(ceLTP * 0.4);  // 40% SL on premium
+  const peSL     = Math.round(peLTP * 0.4);
+  const ceTgt1   = Math.round(ceLTP * 1.5);
+  const ceTgt2   = Math.round(ceLTP * 2.2);
+  const peTgt1   = Math.round(peLTP * 1.5);
+  const peTgt2   = Math.round(peLTP * 2.2);
+
+  // Support/Resistance from OI
+  let maxCallOI=0, maxPutOI=0, resStrike=atm, supStrike=atm;
+  chainData.forEach(d => {
+    const ceOI = d.call_options?.market_data?.oi||0;
+    const peOI = d.put_options?.market_data?.oi||0;
+    if (ceOI > maxCallOI && d.strike_price > spot) { maxCallOI=ceOI; resStrike=d.strike_price; }
+    if (peOI > maxPutOI  && d.strike_price < spot) { maxPutOI=peOI;  supStrike=d.strike_price; }
+  });
+
+  const straddle = Math.round(ceLTP + peLTP);
+  const lot = INSTRUMENTS[instrKey]?.lot || 25;
+
+  document.getElementById('tradeCards').innerHTML = `
+    <!-- BULLISH SETUP -->
+    <div class="trade-card bull-card">
+      <div class="trade-card-title" style="color:var(--green)">📈 BULLISH CE BUY</div>
+      <div class="trade-row">
+        <span class="trade-key">Strike</span>
+        <span class="trade-val" style="color:var(--green)">${fmtN(ceStrike)} CE</span>
+      </div>
+      <div class="trade-row">
+        <span class="trade-key">Entry</span>
+        <span class="trade-val">${fmtN(atmP1?.call_options?.market_data?.ltp || ceLTP)}</span>
+      </div>
+      <div class="trade-row">
+        <span class="trade-key">Stop Loss</span>
+        <span class="trade-val" style="color:var(--red)">₹${ceSL} <span style="font-size:9px;opacity:.6">(−40%)</span></span>
+      </div>
+      <div class="trade-row">
+        <span class="trade-key">Target 1</span>
+        <span class="trade-val" style="color:var(--green)">₹${ceTgt1} <span style="font-size:9px;opacity:.6">(+50%)</span></span>
+      </div>
+      <div class="trade-row">
+        <span class="trade-key">Target 2</span>
+        <span class="trade-val" style="color:var(--green)">₹${ceTgt2} <span style="font-size:9px;opacity:.6">(+120%)</span></span>
+      </div>
+      <div class="trade-row">
+        <span class="trade-key">Resistance</span>
+        <span class="trade-val" style="color:var(--red)">${fmtN(resStrike)}</span>
+      </div>
+      <div class="trade-rr" style="color:var(--green)">
+        Entry condition: Spot ${fmtN(atm+step)} ke upar 15-min sustain kare
+      </div>
+    </div>
+
+    <!-- BEARISH SETUP -->
+    <div class="trade-card bear-card">
+      <div class="trade-card-title" style="color:var(--red)">📉 BEARISH PE BUY</div>
+      <div class="trade-row">
+        <span class="trade-key">Strike</span>
+        <span class="trade-val" style="color:var(--red)">${fmtN(peStrike)} PE</span>
+      </div>
+      <div class="trade-row">
+        <span class="trade-key">Entry</span>
+        <span class="trade-val">${fmtN(atmM1?.put_options?.market_data?.ltp || peLTP)}</span>
+      </div>
+      <div class="trade-row">
+        <span class="trade-key">Stop Loss</span>
+        <span class="trade-val" style="color:var(--red)">₹${peSL} <span style="font-size:9px;opacity:.6">(−40%)</span></span>
+      </div>
+      <div class="trade-row">
+        <span class="trade-key">Target 1</span>
+        <span class="trade-val" style="color:var(--green)">₹${peTgt1} <span style="font-size:9px;opacity:.6">(+50%)</span></span>
+      </div>
+      <div class="trade-row">
+        <span class="trade-key">Target 2</span>
+        <span class="trade-val" style="color:var(--green)">₹${peTgt2} <span style="font-size:9px;opacity:.6">(+120%)</span></span>
+      </div>
+      <div class="trade-row">
+        <span class="trade-key">Support</span>
+        <span class="trade-val" style="color:var(--green)">${fmtN(supStrike)}</span>
+      </div>
+      <div class="trade-rr" style="color:var(--red)">
+        Entry condition: Spot ${fmtN(atm-step)} ke neeche 15-min sustain kare
+      </div>
+    </div>
+
+    <!-- NEUTRAL / STRADDLE -->
+    <div class="trade-card" style="border-color:rgba(255,208,0,.2);grid-column:span 2;">
+      <div class="trade-card-title" style="color:var(--yellow)">⚖️ SIDEWAYS — SHORT STRADDLE</div>
+      <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:8px;">
+        <div><div class="trade-key">ATM</div><div class="trade-val">${fmtN(atm)}</div></div>
+        <div><div class="trade-key">Total Premium</div><div class="trade-val" style="color:var(--yellow)">₹${straddle}</div></div>
+        <div><div class="trade-key">Lower BE</div><div class="trade-val" style="color:var(--green)">${fmtN(atm - straddle)}</div></div>
+        <div><div class="trade-key">Upper BE</div><div class="trade-val" style="color:var(--red)">${fmtN(atm + straddle)}</div></div>
+      </div>
+      <div class="trade-rr" style="color:var(--yellow);margin-top:10px;">
+        Sell ${fmtN(atm)} CE + Sell ${fmtN(atm)} PE — Market ${fmtN(atm-straddle)} to ${fmtN(atm+straddle)} range mein rahe toh profit
+      </div>
+    </div>
+  `;
+}
+
+/* ══════════════════════════════════════════════════════
+   OI CHANGE TRACKER
+══════════════════════════════════════════════════════ */
+function toggleOITracker() {
+  const body = document.getElementById('oiTrackerBody');
+  const chev = document.getElementById('oiTrackerChevron');
+  const open = body.style.display === 'none' || !body.style.display;
+  body.style.display = open ? 'block' : 'none';
+  chev.textContent = open ? '▼' : '▶';
+  if (open) updateOITracker();
+}
+
+function updateOITracker() {
+  if (!chainData.length) return;
+  let totalCallOI=0, totalPutOI=0, prevCallOI=0, prevPutOI=0;
+  const strikeChanges = [];
+
+  chainData.forEach(d => {
+    const ce = d.call_options?.market_data || {};
+    const pe = d.put_options?.market_data  || {};
+    totalCallOI += ce.oi||0; prevCallOI += ce.prev_oi||0;
+    totalPutOI  += pe.oi||0; prevPutOI  += pe.prev_oi||0;
+    const ceChg = (ce.oi||0)-(ce.prev_oi||0);
+    const peChg = (pe.oi||0)-(pe.prev_oi||0);
+    strikeChanges.push({ strike:d.strike_price, ceChg, peChg, ceChgPct: ce.prev_oi>0?ceChg/ce.prev_oi*100:0, peChgPct: pe.prev_oi>0?peChg/pe.prev_oi*100:0 });
+  });
+
+  const totalCallChg = totalCallOI - prevCallOI;
+  const totalPutChg  = totalPutOI  - prevPutOI;
+
+  document.getElementById('oitCallChg').textContent   = (totalCallChg>=0?'+':'')+fmtK(totalCallChg);
+  document.getElementById('oitCallChg').style.color   = totalCallChg>0?'var(--red)':'var(--green)';
+  document.getElementById('oitCallChgPct').textContent= prevCallOI>0?(totalCallChg/prevCallOI*100).toFixed(1)+'% change':'—';
+  document.getElementById('oitPutChg').textContent    = (totalPutChg>=0?'+':'')+fmtK(totalPutChg);
+  document.getElementById('oitPutChg').style.color    = totalPutChg>0?'var(--green)':'var(--red)';
+  document.getElementById('oitPutChgPct').textContent = prevPutOI>0?(totalPutChg/prevPutOI*100).toFixed(1)+'% change':'—';
+
+  // Max addition strikes
+  const maxCallAdd = strikeChanges.sort((a,b)=>b.ceChg-a.ceChg)[0];
+  const maxPutAdd  = [...strikeChanges].sort((a,b)=>b.peChg-a.peChg)[0];
+  document.getElementById('oitMaxCallAdd').textContent   = '+'+fmtK(maxCallAdd?.ceChg||0);
+  document.getElementById('oitMaxCallStrike').textContent= `@ ${fmtN(maxCallAdd?.strike||0)} CE`;
+  document.getElementById('oitMaxPutAdd').textContent    = '+'+fmtK(maxPutAdd?.peChg||0);
+  document.getElementById('oitMaxPutStrike').textContent = `@ ${fmtN(maxPutAdd?.strike||0)} PE`;
+
+  // Top 8 strikes by total OI change
+  const top = [...strikeChanges].sort((a,b)=>Math.abs(b.ceChg)+Math.abs(b.peChg)-Math.abs(a.ceChg)-Math.abs(a.peChg)).slice(0,8);
+  const maxChg = Math.max(...top.map(t=>Math.abs(t.ceChg)+Math.abs(t.peChg)),1);
+
+  document.getElementById('oiTopStrikes').innerHTML = top.map(t => `
+    <div class="oi-strike-row">
+      <span style="color:var(--text);min-width:55px;">${fmtN(t.strike)}</span>
+      <div style="flex:1;display:flex;flex-direction:column;gap:2px;margin:0 8px;">
+        <div style="display:flex;align-items:center;gap:4px;font-size:9px;">
+          <span style="color:var(--red);min-width:28px;">CE</span>
+          <div style="flex:1;height:4px;background:var(--border);border-radius:2px;overflow:hidden;">
+            <div style="height:100%;width:${Math.min(100,Math.abs(t.ceChg)/maxChg*100)}%;background:${t.ceChg>0?'var(--red)':'var(--green)'};border-radius:2px;"></div>
+          </div>
+          <span style="color:${t.ceChg>0?'var(--red)':'var(--green)'};min-width:45px;text-align:right;">${t.ceChg>0?'+':''}${fmtK(t.ceChg)}</span>
+        </div>
+        <div style="display:flex;align-items:center;gap:4px;font-size:9px;">
+          <span style="color:var(--green);min-width:28px;">PE</span>
+          <div style="flex:1;height:4px;background:var(--border);border-radius:2px;overflow:hidden;">
+            <div style="height:100%;width:${Math.min(100,Math.abs(t.peChg)/maxChg*100)}%;background:${t.peChg>0?'var(--green)':'var(--red)'};border-radius:2px;"></div>
+          </div>
+          <span style="color:${t.peChg>0?'var(--green)':'var(--red)'};min-width:45px;text-align:right;">${t.peChg>0?'+':''}${fmtK(t.peChg)}</span>
+        </div>
+      </div>
+    </div>`).join('');
+}
+
+/* ══════════════════════════════════════════════════════
+   PRICE ALERTS
+══════════════════════════════════════════════════════ */
+let priceAlerts = JSON.parse(localStorage.getItem('priceAlerts')||'[]');
+
+function togglePriceAlerts() {
+  const body = document.getElementById('priceAlertBody');
+  const chev = document.getElementById('priceAlertChevron');
+  const open = body.style.display === 'none' || !body.style.display;
+  body.style.display = open ? 'block' : 'none';
+  chev.textContent = open ? '▼' : '▶';
+  if (open) renderPriceAlerts();
+}
+
+function addPriceAlert() {
+  const level = parseFloat(document.getElementById('paLevel').value);
+  const type  = document.getElementById('paType').value;
+  const note  = document.getElementById('paNote').value || '';
+  if (!level || isNaN(level)) return toast('Valid price daalo', true);
+  priceAlerts.push({ level, type, note, triggered:false, id: Date.now() });
+  localStorage.setItem('priceAlerts', JSON.stringify(priceAlerts));
+  document.getElementById('paLevel').value = '';
+  document.getElementById('paNote').value  = '';
+  renderPriceAlerts();
+  toast(`✓ Alert set: ${type==='above'?'↑':'↓'} ${fmtN(level)}`, false);
+}
+
+function removePriceAlert(id) {
+  priceAlerts = priceAlerts.filter(a => a.id !== id);
+  localStorage.setItem('priceAlerts', JSON.stringify(priceAlerts));
+  renderPriceAlerts();
+}
+
+function renderPriceAlerts() {
+  const el = document.getElementById('priceAlertList');
+  if (!priceAlerts.length) { el.innerHTML = '<div style="color:var(--muted);font-family:var(--font-mono);font-size:10px;padding:8px 0;">Koi alert nahi.</div>'; return; }
+  el.innerHTML = priceAlerts.map(a => `
+    <div class="pal-item ${a.triggered?'pal-triggered':''}">
+      <span style="color:${a.type==='above'?'var(--green)':'var(--red)'};">${a.type==='above'?'↑':'↓'} ${fmtN(a.level)}</span>
+      <span style="color:var(--muted);font-size:9px;">${a.note||''}</span>
+      <span style="color:${a.triggered?'var(--green)':'var(--muted)'};">${a.triggered?'✅ TRIGGERED':'WAITING'}</span>
+      <button onclick="removePriceAlert(${a.id})" style="background:none;border:none;color:var(--muted);cursor:pointer;font-size:11px;padding:2px 6px;">✕</button>
+    </div>`).join('');
+}
+
+function checkPriceAlerts(spot) {
+  if (!spot) return;
+  priceAlerts.forEach(a => {
+    if (a.triggered) return;
+    const hit = (a.type==='above' && spot >= a.level) || (a.type==='below' && spot <= a.level);
+    if (hit) {
+      a.triggered = true;
+      localStorage.setItem('priceAlerts', JSON.stringify(priceAlerts));
+      // Sound
+      try { const ctx=new AudioContext(); const o=ctx.createOscillator(); const g=ctx.createGain(); o.connect(g); g.connect(ctx.destination); o.frequency.value=880; g.gain.setValueAtTime(.3,ctx.currentTime); g.gain.exponentialRampToValueAtTime(.001,ctx.currentTime+.8); o.start(); o.stop(ctx.currentTime+.8); } catch(e){}
+      toast(`🔔 ALERT: Spot ${fmtN(spot)} — ${a.type==='above'?'↑':'↓'} ${fmtN(a.level)} ${a.note?'('+a.note+')':''}`, false);
+      sendNotification(`🔔 Price Alert: Spot ${spot} ne ${a.type==='above'?'upar '+a.level:'neeche '+a.level} cross kiya! ${a.note||''}`, '🔔 PRICE ALERT', 'spike');
+      renderPriceAlerts();
+    }
+  });
+}
+
+/* ══════════════════════════════════════════════════════
+   FII / DII DATA
+══════════════════════════════════════════════════════ */
+function toggleFiiDii() {
+  const body = document.getElementById('fiiDiiBody');
+  const chev = document.getElementById('fiiDiiChevron');
+  const open = body.style.display === 'none' || !body.style.display;
+  body.style.display = open ? 'block' : 'none';
+  chev.textContent = open ? '▼' : '▶';
+}
+
+async function fetchFiiDii() {
+  document.getElementById('fiiCash').textContent = '...';
+  document.getElementById('diiCash').textContent = '...';
+  // Try NSE via proxy
+  try {
+    const url = 'https://www.nseindia.com/api/fiidiiTradeReact';
+    const r = await fetch(`https://corsproxy.io/?${encodeURIComponent(url)}`, { headers:{ Accept:'application/json' } });
+    const data = await r.json();
+    const fii = data?.find?.(d => d.category==='FII/FPI') || data?.[0];
+    const dii = data?.find?.(d => d.category==='DII') || data?.[1];
+    if (fii) {
+      const fiiNet = parseFloat(fii.netVal||fii.net||0);
+      document.getElementById('fiiCash').textContent = (fiiNet>=0?'+':'')+fiiNet.toFixed(0)+' Cr';
+      document.getElementById('fiiCash').style.color = fiiNet>=0?'var(--green)':'var(--red)';
+      document.getElementById('fiiCashNote').textContent = fii.date||'Today';
+      document.getElementById('fiiCashBar').style.width = Math.min(100,Math.abs(fiiNet)/5000*100)+'%';
+      document.getElementById('fiiCashBar').style.background = fiiNet>=0?'var(--green)':'var(--red)';
+    }
+    if (dii) {
+      const diiNet = parseFloat(dii.netVal||dii.net||0);
+      document.getElementById('diiCash').textContent = (diiNet>=0?'+':'')+diiNet.toFixed(0)+' Cr';
+      document.getElementById('diiCash').style.color = diiNet>=0?'var(--green)':'var(--red)';
+      document.getElementById('diiCashNote').textContent = dii.date||'Today';
+      document.getElementById('diiCashBar').style.width = Math.min(100,Math.abs(diiNet)/5000*100)+'%';
+      document.getElementById('diiCashBar').style.background = diiNet>=0?'var(--green)':'var(--red)';
+    }
+    // Sentiment
+    const fiiNet2 = parseFloat(fii?.netVal||0);
+    const diiNet2 = parseFloat(dii?.netVal||0);
+    const sent = fiiNet2>0&&diiNet2>0?'BOTH BUYING 🟢':fiiNet2<0&&diiNet2<0?'BOTH SELLING 🔴':fiiNet2>0?'FII BUYING 🟢':'DII BUYING 🟡';
+    document.getElementById('fiiSentiment').textContent = sent.split(' ')[0]+' '+sent.split(' ')[1];
+    document.getElementById('fiiSentimentNote').textContent = sent;
+    document.getElementById('fiiIndexFut').textContent = fiiNet2>1000?'LONG HEAVY':fiiNet2<-1000?'SHORT HEAVY':'MIXED';
+    document.getElementById('fiiIndexFut').style.color = fiiNet2>0?'var(--green)':'var(--red)';
+  } catch(e) {
+    document.getElementById('fiiCash').textContent = 'CORS ERR';
+    document.getElementById('diiCash').textContent = 'Manual check karo';
+    document.getElementById('fiiCashNote').textContent = 'NSE direct access blocked';
+    toast('FII/DII: CORS blocked. NSE link se manually dekho.', true);
+  }
+}
+
+/* ══════════════════════════════════════════════════════
+   SUPPORT/RESISTANCE ON CHART — handled in renderChart
+   (auto-drawn via maxCallStrike & maxPutStrike annotations)
+══════════════════════════════════════════════════════ */
+
+/* toggle helpers */
+function toggleOITracker() {
+  const b=document.getElementById('oiTrackerBody'),c=document.getElementById('oiTrackerChevron');
+  const o=b.style.display==='none'||!b.style.display;
+  b.style.display=o?'block':'none'; c.textContent=o?'▼':'▶';
+  if(o) updateOITracker();
+}
+
 /* ════════════════════════════════════════ AUTH ══ */
 function switchTab(name) {
   document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
@@ -3684,7 +4718,17 @@ async function fetchChain() {
     onChainLoaded();
     toast('✓ Option chain loaded — ' + chainData.length + ' strikes', false);
   } catch(e) {
-    document.getElementById('tableContainer').innerHTML = `<div class="center-msg" style="color:var(--red)">⚠ ${e.message}</div>`;
+    const instrKey = document.getElementById('symbolSel').value;
+    const isStock  = INSTRUMENTS[instrKey]?.type === 'stock';
+    const errMsg   = isStock
+      ? `⚠ Stock option chain load nahi hua: ${e.message}<br><br>
+         <span style="font-size:10px;color:var(--muted)">
+         Stock ke liye Upstox instrument key exact hona chahiye (e.g. NSE_EQ|INE040A01034).<br>
+         Upstox Developer Console → Instruments list se exact key copy karo.<br>
+         Ya phir Index (Nifty/Sensex) try karo.
+         </span>`
+      : `⚠ ${e.message}`;
+    document.getElementById('tableContainer').innerHTML = `<div class="center-msg" style="color:var(--red);text-align:center;padding:30px;">${errMsg}</div>`;
     toast(e.message, true);
   }
 }
@@ -3720,7 +4764,10 @@ function updateStats() {
   if (!chainData.length) return;
   const spot = chainData[0].underlying_spot_price || 0;
   document.getElementById('statSpot').textContent    = fmt(spot);
-  document.getElementById('statSpotSub').textContent = chainData[0].underlying_key?.split('|')[1] || '';
+  // Show selected symbol label — NOT underlying_key from API (which may differ for stocks)
+  const _instrKey = document.getElementById('symbolSel').value;
+  const _instrLabel = INSTRUMENTS[_instrKey]?.label || (chainData[0].underlying_key?.split('|')[1] || '');
+  document.getElementById('statSpotSub').textContent = _instrLabel;
 
   let callOI = 0, putOI = 0;
   chainData.forEach(d => {
