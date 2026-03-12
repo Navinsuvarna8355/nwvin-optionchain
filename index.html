@@ -40,7 +40,7 @@ body {
   color: var(--text);
   font-family: var(--font-body);
   min-height: 100vh;
-  overflow-x: hidden;
+  overflow-x: hidden; /* desktop only — mobile overrides below */
 }
 
 body::before {
@@ -854,6 +854,10 @@ input[type=range]::-webkit-slider-thumb {
   background:var(--panel); border:1px solid var(--border); border-radius:10px;
   overflow:hidden;
 }
+/* Mobile: allow horizontal scroll inside table */
+@media (max-width:768px) {
+  .table-wrap { overflow:visible; }
+}
 .table-topbar {
   display:flex; align-items:center; justify-content:space-between;
   padding:12px 18px; background:var(--panel2);
@@ -1006,12 +1010,18 @@ tr.atm-row td.strike-cell { color:var(--accent); }
 
   /* Option Chain Table — horizontal scroll */
   #tableContainer {
-    overflow-x: auto;
+    overflow-x: scroll !important;
+    overflow-y: visible;
     -webkit-overflow-scrolling: touch;
+    width: 100%;
+    display: block;
+    position: relative;
   }
   #tableContainer table {
-    min-width: 750px;
+    min-width: 700px;
+    width: max-content;
     font-size: 10px;
+    table-layout: auto;
   }
   td { padding:6px 7px; font-size:10px; }
   td.strike-cell { padding:6px 8px; font-size:12px; }
@@ -1390,9 +1400,12 @@ tr.atm-row td.strike-cell { color:var(--accent); }
           <div class="table-sub" id="tableSubtitle">NIFTY 50 — Live Data</div>
         </div>
       </div>
-      <div class="show-count" id="showCount">—</div>
+      <div style="display:flex;align-items:center;gap:10px;">
+        <div class="show-count" id="showCount">—</div>
+        <div id="scrollHint" style="display:none;font-family:var(--font-mono);font-size:9px;color:var(--accent);letter-spacing:.5px;animation:pulse 1.5s infinite;">← SCROLL →</div>
+      </div>
     </div>
-    <div class="scroll-x">
+    <div class="scroll-x" style="overflow-x:auto;-webkit-overflow-scrolling:touch;width:100%;">
       <div id="tableContainer" class="center-msg">
         <div class="spinner"></div>
         <div>FETCHING LIVE DATA...</div>
@@ -4009,5 +4022,93 @@ function toast(msg, isErr = false) {
   el._t = setTimeout(() => { el.style.display = 'none'; }, isErr ? 6000 : 3000);
 }
 </script>
+
+<!-- ═══ MOBILE BOTTOM NAV ═══ -->
+<div id="mobileNav" style="
+  display:none;
+  position:fixed; bottom:0; left:0; right:0; z-index:200;
+  background:rgba(7,11,18,.97);
+  border-top:1px solid var(--border2);
+  padding:8px 0 env(safe-area-inset-bottom,8px);
+  backdrop-filter:blur(20px);
+">
+  <div style="display:flex; justify-content:space-around; align-items:center;">
+    <button onclick="mobileScrollTo('chain')" style="background:none;border:none;color:var(--muted);display:flex;flex-direction:column;align-items:center;gap:2px;padding:4px 8px;cursor:pointer;font-family:var(--font-mono);font-size:8px;letter-spacing:.5px;">
+      <span style="font-size:18px;">📊</span>CHAIN
+    </button>
+    <button onclick="mobileScrollTo('ai')" style="background:none;border:none;color:var(--muted);display:flex;flex-direction:column;align-items:center;gap:2px;padding:4px 8px;cursor:pointer;font-family:var(--font-mono);font-size:8px;letter-spacing:.5px;">
+      <span style="font-size:18px;">🧠</span>AI
+    </button>
+    <button onclick="document.getElementById('refreshBtn').click()" style="background:var(--accent);border:none;color:#000;display:flex;flex-direction:column;align-items:center;gap:2px;padding:8px 20px;border-radius:20px;cursor:pointer;font-family:var(--font-mono);font-size:9px;font-weight:700;letter-spacing:1px;">
+      <span style="font-size:16px;">⟳</span>REFRESH
+    </button>
+    <button onclick="mobileScrollTo('unusual')" style="background:none;border:none;color:var(--muted);display:flex;flex-direction:column;align-items:center;gap:2px;padding:4px 8px;cursor:pointer;font-family:var(--font-mono);font-size:8px;letter-spacing:.5px;">
+      <span style="font-size:18px;">🔥</span>ALERTS
+    </button>
+    <button onclick="mobileScrollTo('wa')" style="background:none;border:none;color:var(--muted);display:flex;flex-direction:column;align-items:center;gap:2px;padding:4px 8px;cursor:pointer;font-family:var(--font-mono);font-size:8px;letter-spacing:.5px;">
+      <span style="font-size:18px;">💬</span>WA
+    </button>
+  </div>
+</div>
+
+<script>
+(function(){
+  function checkMobileNav() {
+    const nav = document.getElementById('mobileNav');
+    if (!nav) return;
+    if (window.innerWidth <= 768) {
+      nav.style.display = 'block';
+      document.querySelector('.app').style.paddingBottom = '72px';
+      // Show scroll hint
+      const hint = document.getElementById('scrollHint');
+      if (hint) hint.style.display = 'block';
+    } else {
+      nav.style.display = 'none';
+      document.querySelector('.app').style.paddingBottom = '0';
+      const hint = document.getElementById('scrollHint');
+      if (hint) hint.style.display = 'none';
+    }
+  }
+  window.addEventListener('resize', checkMobileNav);
+  window.addEventListener('DOMContentLoaded', checkMobileNav);
+  checkMobileNav();
+
+  // Hide scroll hint after first scroll
+  document.addEventListener('scroll', function() {
+    const hint = document.getElementById('scrollHint');
+    if (hint) hint.style.display = 'none';
+  }, { once: true, passive: true });
+
+  // Also handle touch scroll on table
+  document.addEventListener('DOMContentLoaded', function() {
+    const wrap = document.querySelector('.scroll-x');
+    if (wrap) {
+      wrap.addEventListener('touchstart', function() {
+        const hint = document.getElementById('scrollHint');
+        if (hint) hint.style.display = 'none';
+      }, { once: true, passive: true });
+    }
+  });
+
+  window.mobileScrollTo = function(key) {
+    const targets = {
+      chain:   () => document.querySelector('#tableContainer, .section-panel'),
+      ai:      () => document.querySelector('.ai-panel'),
+      unusual: () => document.querySelector('.unusual-panel, #unusualBody'),
+      wa:      () => document.querySelector('.wa-panel, #waBody')
+    };
+    // Find all section panels and match by header text
+    const panels = document.querySelectorAll('.section-panel');
+    const textMap = { chain:'OPTION CHAIN', ai:'AI MARKET', unusual:'UNUSUAL', wa:'WHATSAPP' };
+    let found = null;
+    panels.forEach(p => {
+      if (textMap[key] && p.textContent.toUpperCase().includes(textMap[key])) found = p;
+    });
+    if (!found && targets[key]) found = targets[key]();
+    if (found) found.scrollIntoView({behavior:'smooth', block:'start'});
+  };
+})();
+</script>
+
 </body>
 </html>
